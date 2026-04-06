@@ -25,8 +25,6 @@ Os conceitos básicos para a compreensão do LangChain e LangGraph, assim como o
 
 **Desafio 1**: Criar uma chain que receba uma pergunta, gere uma resposta através da LLM e faça o parsing da resposta.
 
-**Desafio 2**: Criar um agente ReAct de busca na web usando LangChain.
-
 ## LangGraph Hands-On
 
-**Desafio 3**: Criar um assistente de compras que recebe uma lista manuscrita de itens e gera uma estimativa de gasto total.
+**Desafio 2**: Criar um assistente de compras que recebe uma lista manuscrita de itens e gera uma estimativa de gasto total.
