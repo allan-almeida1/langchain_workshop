@@ -14,7 +14,7 @@ uv init
 
 3. Instalar dependências
 ```bash
-uv add langchain langchain-openai langgraph langchain-tavily
+uv add langchain langchain-openai langgraph langchain-tavily python-dotenv
 ```
 
 ## Conceitos
