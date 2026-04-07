@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "langchain>=1.2.15",
+    "langchain-groq>=1.1.2",
     "langchain-openai>=1.1.12",
     "langchain-tavily>=0.2.17",
     "langgraph>=1.1.6",
