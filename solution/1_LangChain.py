@@ -10,24 +10,22 @@ load_dotenv()
 
 
 # 1. Definindo a estrutura da resposta desejada
-class RespostaAgente(BaseModel):
-    analise: str = Field(description="Uma análise breve da pergunta")
-    pontos_chave: List[str] = Field(
-        description="Lista de pontos principais da resposta"
-    )
-    confianca: float = Field(description="Nível de confiança de 0 a 1")
+class AgentResponse(BaseModel):
+    analysis: str = Field(description="A brief analysis of the question")
+    keypoints: List[str] = Field(description="List of keypoints of the answer")
+    confidence: float = Field(description="Confidence level (0 ~ 1)")
 
 
 # 2. Configurando o Parser e o Prompt
-parser = PydanticOutputParser(pydantic_object=RespostaAgente)
+parser = PydanticOutputParser(pydantic_object=AgentResponse)
 
 prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "Você é um assistente técnico. Responda sempre no formato JSON esperado.\n{format_instructions}",
+            "You are a technical assistant. Always answer in the expected JSON format.\n{format_instructions}",
         ),
-        ("user", "{pergunta}"),
+        ("user", "{question}"),
     ]
 ).partial(format_instructions=parser.get_format_instructions())
 
@@ -38,10 +36,10 @@ model = ChatOpenAI(model="gpt-4o", temperature=0)
 chain = prompt | model | parser
 
 # 5. Execução
-pergunta_usuario = "Quais as vantagens de usar o LangChain?"
-resultado: RespostaAgente = chain.invoke({"pergunta": pergunta_usuario})
+user_question = "What are the advantages of using LangChain?"
+result: AgentResponse = chain.invoke({"question": user_question})
 
-print(f"Análise: {resultado.analise}")
-print(f"Confiança: {resultado.confianca}")
-for ponto in resultado.pontos_chave:
-    print(f"- {ponto}")
+print(f"Análise: {result.analysis}")
+print(f"Confiança: {result.confidence}")
+for keypoint in result.keypoints:
+    print(f"- {keypoint}")
